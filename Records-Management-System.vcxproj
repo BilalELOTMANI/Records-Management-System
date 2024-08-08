@@ -127,14 +127,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Student-Record-Management-System\main.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Student-Record-Management-System\adminFunction.h" />
-    <ClInclude Include="..\Student-Record-Management-System\loading.h" />
+    <None Include="data.csv" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Student-Record-Management-System\data.csv" />
+    <ClInclude Include="adminFunction.h" />
+    <ClInclude Include="loading.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
