@@ -1,9 +1,12 @@
 #include <fstream>
+#include <sstream>
 #include <string.h>
-#include <bits/stdc++.h>
+#include "stdc++.h"
 #include <string>
 #include <Windows.h>
 #include <stdlib.h>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
