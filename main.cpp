@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void passwordVerification(void); //  password Verification
+void passwordVerification(void); // password Verification
 void mainMenu(void);    
 
 //Auth Before opening the main program ok
