@@ -24,27 +24,6 @@ Ensure you have the following installed on your system:
 - A C++ IDE or text editor (like Visual Studio Code, CLion, etc.)
 - Windows OS (for `Windows.h` dependency)
 
-### Installation
-
-1. **Clone the Repository:**
-    ```bash
-    git clone https://github.com/yourusername/student-records-management-system.git
-    ```
-2. **Navigate to the Project Directory:**
-    ```bash
-    cd student-records-management-system
-    ```
-3. **Compile the Project:**
-    - For Windows:
-      ```bash
-      g++ -o student_management main.cpp loginVerification.cpp functionality.cpp loading.cpp -luser32
-      ```
-    - For other systems, you might need to adjust the `#include <Windows.h>` dependencies.
-
-4. **Run the Executable:**
-    ```bash
-    ./student_management
-    ```
 
 ### File Structure
 
