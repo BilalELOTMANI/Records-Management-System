@@ -151,93 +151,6 @@ void mainMenu()
     system("pause");
 }
 
-/*
-void deleteData()
-{
-    system("cls");
-
-    // File stream objects
-    fstream fin, fout;  // fin to read, fout to write
-
-    // Open the existing file
-    fin.open("data.csv", ios::in);
-
-    // Create a new file to store the non-deleted data
-    fout.open("datanew.csv", ios::out);
-
-    int rollnum, roll1, marks, count = 0, i;
-    char sub;
-    int index, new_marks;
-    string line, word;
-    vector<string> row;
-
-    // Get the roll number of the student to be deleted
-    cout << "Enter the roll number "
-         << "of the record to be deleted: ";
-    cin >> rollnum;
-
-    // Check if this record exists
-    // If exists, leave it and
-    // add all other data to the new file
-    while (!fin.eof())
-    {
-
-        row.clear();
-
-        getline(fin, line);
-        stringstream s(line);
-
-        while (getline(s, word, ','))
-        {
-            row.push_back(word);
-        }
-
-        int row_size = row.size();
-        roll1 = stoi(row[0]);
-
-        // writing all records,
-        // except the record to be deleted,
-        // into the new file 'reportcardnew.csv'
-        // using fout pointer
-        if (roll1 != rollnum)
-        {
-            if (!fin.eof())
-            {
-                for (i = 0; i < row_size - 1; i++)
-                {
-                    fout << row[i] << ",";
-                }
-                fout << row[row_size - 1] << "\n";
-            }
-        }
-        else
-        {
-            count = 1;
-        }
-        if (fin.eof())
-            break;
-    }
-    if (count == 1)
-        cout << "Record deleted\n";
-    else
-        cout << "Record not found\n";
-
-    // Close the pointers
-    fin.close();
-    fout.close();
-
-    // removing the existing file
-    remove("data.csv");
-
-    // renaming the new file with the existing file name
-    rename("datanew.csv", "data.csv");
-
-    Sleep(2000);
-
-    adminFunction();
-}
-*/
-
 void deleteData()
 {
     system("cls");
@@ -302,75 +215,7 @@ void deleteData()
     adminFunction(); 
 }
 
-/*
-void addData()
-{
-    system("cls");
-    fstream file("data.csv", ios::out | ios::app);
-    if (!file.is_open())
-    {
-        cout << "Error opening file!" << endl;
-        return;
-    }
-    else
-        cout << "\t|Enter Data|" << endl
-             << endl;
 
-    string rollNumber, name, college, branch, attendance, physics, chemistry, maths;
-    string moreData;
-
-    cout << "\nEnter Student's roll Number : ";
-    cin >> rollNumber;
-    file << "\n"
-         << rollNumber << ", ";
-
-    cout << "\nEnter Student's Name : ";
-    cin >> name;
-    file << name << ", ";
-
-    cout << "\nEnter College : ";
-    cin >> college;
-    file << college << ", ";
-
-    cout << "\nEnter Branch : ";
-    cin >> branch;
-    file << branch << ", ";
-
-    cout << "\nEnter Attendance : ";
-    cin >> attendance;
-    file << attendance << ", ";
-
-    cout << "\nEnter Physic's Record : ";
-    cin >> physics;
-    file << physics << ", ";
-
-    cout << "\nEnter Chemistry Record : ";
-    cin >> chemistry;
-    file << chemistry << ", ";
-
-    cout << "\nEnter Maths Record : ";
-    cin >> maths;
-    file << maths;
-
-    file.close();
-
-    cout << "\nAdd more Record? (Y / N) : ";
-
-    cin >> moreData;
-    if (moreData == "y" || moreData == "Y" || moreData == "yes" || moreData == "Yes")
-    {
-        addData();
-    }
-    else if (moreData == "n" || moreData == "N" || moreData == "no" || moreData == "No")
-        adminFunction();
-
-    else
-        cout << "\nEnter a valid option";
-
-    adminFunction();
-}
-
-*/
 void addData()
 {
     system("cls");
@@ -421,50 +266,7 @@ void addData()
     }
 }
 
-/*
 
-void viewData()
-{
-    system("cls");
-
-    fstream file("data.csv");
-
-    if (!file.is_open())
-    {
-        cout << "Error opening file!" << endl;
-        return;
-    }
-
-    cout << "\n\t\t\t\t\t\t|Students Record| \n\n";
-
-    cout << "\n-----------------------------------------------------------------------------------------------------------------------\n"
-         << endl
-         << endl;
-    cout << "Roll \t Name \t\t\t College \t branch \t Attendance \t Physics \t Chemistry \t Maths" << endl
-         << endl;
-    string rollNumber, name, college, branch, attendance, physics, chemistry, maths;
-
-    while (!file.eof()) 
-    {
-        getline(file, rollNumber, ',');
-        getline(file, name, ',');
-        getline(file, college, ',');
-        getline(file, branch, ',');
-        getline(file, attendance, ',');
-        getline(file, physics, ',');
-        getline(file, chemistry, ',');
-        getline(file, maths, '\n');
-
-        cout << rollNumber << " \t " << name << "\t\t\t" << college << " \t\t" << branch << " \t\t" << attendance << " \t\t" << physics << " \t\t" << chemistry << " \t\t" << maths << endl;
-        cout << endl;
-    }
-
-    cout << "\n-----------------------------------------------------------------------------------------------------------------------" << endl;
-    file.close();
-
-    adminFunction();
-}
-*/
 
 void viewData()
 {
@@ -582,48 +384,4 @@ void studentFunction()   // correct function
     system("Pause");
     mainMenu();
 }
-
-/*
-void studentFunction()
-{
-
-    system("cls");
-
-    fstream file("data.csv");
-
-    if (!file.is_open())
-    {
-        cout << "Error opening file!" << endl;
-        return;
-    }
-    cout << "\n\t\t\t\t\t\t|Students Record| \n\n";
-
-    cout << "\n-----------------------------------------------------------------------------------------------------------------------\n"
-         << endl
-         << endl;
-    cout << "Roll \t Name \t\t\t College \t branch \t Attendance \t Physics \t Chemistry \t Maths" << endl
-         << endl;
-    string rollNumber, name, college, branch, attendance, physics, chemistry, maths;
-
-    while (!file.eof()) // file.eof() = detects as how long the file
-    {
-        getline(file, rollNumber, ',');
-        getline(file, name, ',');
-        getline(file, college, ',');
-        getline(file, branch, ',');
-        getline(file, attendance, ',');
-        getline(file, physics, ',');
-        getline(file, chemistry, ',');
-        getline(file, maths, '\n');
-
-        cout << rollNumber << " \t " << name << "\t\t\t" << college << " \t\t" << branch << " \t\t" << attendance << " \t\t" << physics << " \t\t" << chemistry << " \t\t" << maths << endl;
-        cout << endl;
-    }
-
-    cout << "\n-----------------------------------------------------------------------------------------------------------------------" << endl;
-    file.close();
-    system("pause");
-    mainMenu();
-}
-*/
 
