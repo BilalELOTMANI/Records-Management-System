@@ -1,22 +1,7 @@
-#include <fstream>
-#include <sstream>
-#include <string.h>
-#include "stdc++.h"
-#include <string>
-#include <Windows.h>
-#include <stdlib.h>
-#include <iostream>
-#include <vector>
+#include "adminFunction.h"
 
 using namespace std;
 
-void addData(void);
-void viewData(void);
-void mainMenu(void);
-//void updateData(void);
-void deleteData(void);
-void adminVerification(void);
-void studentFunction(void);
 
 void adminFunction()
 {
@@ -24,10 +9,9 @@ void adminFunction()
     cout << "\n\n\t\t\t\t\t | Logged In as Admin |\n";
     cout << "\n\n\t\t\t\t\t 1. Add Students Detail";
     cout << "\n\n\t\t\t\t\t 2. Delete Students";
-    //cout << "\n\n\t\t\t\t\t 3. update Record";
-    cout << "\n\n\t\t\t\t\t 4. View Table ";
-    cout << "\n\n\t\t\t\t\t 5. Main Menu ";
-    cout << "\n\n\t\t\t\t\t 6. Exit";
+    cout << "\n\n\t\t\t\t\t 3. View Table ";
+    cout << "\n\n\t\t\t\t\t 4. Main Menu ";
+    cout << "\n\n\t\t\t\t\t 5. Exit";
 
     int option;
     cout << "\n\n\t\t\t\t\tEnter choice : ";
@@ -48,18 +32,14 @@ void adminFunction()
                 break;
 
             case 3:
-                cout << "this option is not available"; //updateData();
-                break;
-
-            case 4:
                 viewData();
                 break;
 
-            case 5:
+            case 4:
                 mainMenu();
                 break;
 
-            case 6:
+            case 5:
                 system("cls");
                 cout << "\t\t\n\n\n\n\n\n\n\t\t\t\t\tQuitting The Program";
 
@@ -77,10 +57,9 @@ void adminFunction()
                 cout << "\n\n\t\t\t\t\t Logged In as Admin";
                 cout << "\n\n\t\t\t\t\t 1. Add Students Record";
                 cout << "\n\n\t\t\t\t\t 2. Delete Record";
-                //  cout << "\n\n\t\t\t\t\t 3. update Record";
-                cout << "\n\n\t\t\t\t\t 4. View Table ";
-                cout << "\n\n\t\t\t\t\t 5. Main Menu ";
-                cout << "\n\n\t\t\t\t\t 6. Exit";
+                cout << "\n\n\t\t\t\t\t 3. View Table ";
+                cout << "\n\n\t\t\t\t\t 4. Main Menu ";
+                cout << "\n\n\t\t\t\t\t 5. Exit";
 
                 cout << "\n\n\t\t\t\t\t invalid input!";
 
@@ -88,8 +67,43 @@ void adminFunction()
             }
         }
 
-    } while (option != '6');
+    } while (option != '5');
 }
+
+
+void adminVerification()
+{
+    system("cls");
+
+    string password;
+
+    cout << "\n\n\n\n\n\t\t\t\t\t";
+    cout << "\n\n\n\t\t\t\t\tEnter Password : ";
+
+    do
+    {
+        cin >> password;
+
+        if (password != "admin")
+        {
+            system("cls");
+            cout << "\n\n\n\n\n\t\t"
+                 << "wrong password!, try again or type 'menu' to Navigate to Main Menu";
+            cout << "\n\n\n\t\t\t\t\tEnter Password : ";
+            cin >> password;
+        }
+
+        if (password == "Menu" || password == "menu" || password == "MENU")
+        {
+            mainMenu();
+        }
+
+    }
+
+    while (password != "admin");
+    adminFunction(); 
+}
+
 
 void mainMenu()
 {
@@ -112,7 +126,7 @@ void mainMenu()
     case 2:
         system("cls");
 
-        cout << "Welcom as Student";
+        cout << "Welcome as Student";
         studentFunction();
         break;
 
@@ -137,14 +151,13 @@ void mainMenu()
     system("pause");
 }
 
-// all Functions for Admin below
 
 void deleteData()
 {
     system("cls");
 
-    // Open FIle pointers
-    fstream fin, fout;
+    // File stream objects
+    fstream fin, fout;  // fin to read, fout to write
 
     // Open the existing file
     fin.open("data.csv", ios::in);
@@ -158,8 +171,7 @@ void deleteData()
     string line, word;
     vector<string> row;
 
-    // Get the roll number
-    // to decide the data to be deleted
+    // Get the roll number of the student to be deleted
     cout << "Enter the roll number "
          << "of the record to be deleted: ";
     cin >> rollnum;
@@ -225,157 +237,81 @@ void deleteData()
     adminFunction();
 }
 
-/*
-void updateData()
+
+void deleteDataOptimized()
 {
     system("cls");
-    cout << "in update function\n";
-        // File pointer
-        fstream fin, fout;
 
-        // Open an existing record
-        fin.open("data.csv", ios::in);
+    fstream file;
+    file.open("data.csv", ios::in); // Open the file for reading
 
-        // Create a new file to store updated data
-        fout.open("datanew.csv", ios::out);
+    if (!file.is_open())
+    {
+        cout << "Error opening file!" << endl;
+        return;
+    }
 
-        int rollnum, roll1, marks, count = 0, i;
-        char sub;
-        int index;
-        string new_marks;
-        string line, word;
-        vector<string> row;
+    vector<string> rows; 
+    string line;
+    int rollnum, roll1;
+    bool found = false;
 
-        // Get the roll number from the user
-        cout << "Enter the roll number "
-             << "of the record to be updated: ";
-        cin >> rollnum;
+    cout << "Enter the roll number of the record to be deleted: ";
+    cin >> rollnum;
 
-        // Get the data to be updated
-        cout << "Enter the first letter fo the Fields (Eg. b for branch & G for college)"
-             << "to be updated(N/G/B/A/P/C/M): ";
-        cin >> sub;
+    while (getline(file, line))
+    {
+        stringstream ss(line);
+        string word;
 
-        // Determine the index of the subject
-        // where Maths has index 7,
-        // Physics has index 6, and so on
+        getline(ss, word, ','); 
+        roll1 = stoi(word);  // Convert word to int
 
-        if (sub == 'n' || 'N')
-            index = 1;
-
-        else if (sub == 'g' || sub == 'G')
-            index = 2;
-
-        else if (sub == 'b' || sub == 'B')
-            index = 3;
-
-        else if (sub == 'a' || sub == 'A')
-            index = 4;
-
-        else if (sub == 'p' || sub == 'P')
-            index = 5;
-
-        else if (sub == 'c' || sub == 'C')
-            index = 6;
-
-        else if (sub == 'm' || sub == 'M')
-            index = 7;
-
+        if (roll1 == rollnum)
+        {
+            found = true; // Mark that we found the record to delete
+        }
         else
         {
-            cout << "Wrong choice.Enter again\n";
-            updateData();
+            rows.push_back(line); // Store the line if it's not the one to delete
         }
+    }
 
-        // Get the new marks
-        cout << "Enter new Detail: ";
-        cin >> new_marks;
+    file.close();
 
-        // Traverse the file
-        while (!fin.eof())
+    if (found)
+    {
+        // Re-open the file for writing (this clears the file content -trunc flag-)
+        file.open("data.csv", ios::out | ios::trunc);
+
+        for (const string &row : rows)
         {
-
-            row.clear();
-
-            getline(fin, line);
-            stringstream s(line);
-
-            while (getline(s, word, ','))
-            {
-                row.push_back(word);
-            }
-
-            roll1 = stoi(row[0]);
-            int row_size = row.size();
-
-            if (roll1 == rollnum)
-            {
-                count = 1;
-                stringstream convert;
-
-                // sending a number as a stream into output string
-                convert << new_marks;
-
-                // the str() converts number into string
-                row[index] = convert.str();
-
-                if (!fin.eof())
-                {
-                    for (i = 0; i < row_size - 1; i++)
-                    {
-
-                        // write the updated data
-                        // into a new file 'reportcardnew.csv'
-                        // using fout
-                        fout << row[i] << ", ";
-                    }
-
-                    fout << row[row_size - 1] << "\n";
-                }
-            }
-            else
-            {
-                if (!fin.eof())
-                {
-                    for (i = 0; i < row_size - 1; i++)
-                    {
-
-                        // writing other existing records
-                        // into the new file using fout.
-                        fout << row[i] << ", ";
-                    }
-
-                    // the last column data ends with a '\n'
-                    fout << row[row_size - 1] << "\n";
-                }
-            }
-            if (fin.eof())
-                break;
+            file << row << "\n";
         }
-        if (count == 0)
-            cout << "Record not found\n";
 
-        fin.close();
-        fout.close();
+        cout << "Record deleted\n";
+    }
+    else
+    {
+        cout << "Record not found\n";
+    }
 
-        // removing the existing file
-        remove("data.csv");
+    file.close();
 
-        // renaming the updated file with the existing file name
-        rename("datadnew.csv", "data.csv");
-    
+    Sleep(2000);
+    adminFunction(); 
 }
 
-*/
+
 void addData()
 {
     system("cls");
     fstream file("data.csv", ios::out | ios::app);
-    if (!file)
+    if (!file.is_open())
     {
-        cout << "\nFailed to open data.csv / data.csv file not found!";
+        cout << "Error opening file!" << endl;
+        return;
     }
-
     else
         cout << "\t|Enter Data|" << endl
              << endl;
@@ -388,7 +324,7 @@ void addData()
     file << "\n"
          << rollNumber << ", ";
 
-    cout << "\nEnter Studnet's Name : ";
+    cout << "\nEnter Student's Name : ";
     cin >> name;
     file << name << ", ";
 
@@ -404,15 +340,15 @@ void addData()
     cin >> attendance;
     file << attendance << ", ";
 
-    cout << "\nEnter Physic's Marks : ";
+    cout << "\nEnter Physic's Record : ";
     cin >> physics;
     file << physics << ", ";
 
-    cout << "\nEnter Chemistry Marks : ";
+    cout << "\nEnter Chemistry Record : ";
     cin >> chemistry;
     file << chemistry << ", ";
 
-    cout << "\nEnter Maths Marks : ";
+    cout << "\nEnter Maths Record : ";
     cin >> maths;
     file << maths;
 
@@ -434,16 +370,70 @@ void addData()
     adminFunction();
 }
 
+
+void addDataOptimized()
+{
+    system("cls");
+    fstream file("data.csv", ios::out | ios::app);
+
+    if (!file.is_open())
+    {
+        cout << "Error opening file!" << endl;
+        return;
+    }
+
+    cout << "\t|Enter Data|\n" << endl;
+
+    string rollNumber, name, college, branch, attendance, physics, chemistry, maths;
+
+    cout << "Enter Student's Roll Number: ";
+    cin >> rollNumber;
+    cout << "Enter Student's Name: ";
+    cin >> name;
+    cout << "Enter College: ";
+    cin >> college;
+    cout << "Enter Branch: ";
+    cin >> branch;
+    cout << "Enter Attendance: ";
+    cin >> attendance;
+    cout << "Enter Physics Record: ";
+    cin >> physics;
+    cout << "Enter Chemistry Record: ";
+    cin >> chemistry;
+    cout << "Enter Maths Record: ";
+    cin >> maths;
+
+    file << rollNumber << ", " << name << ", " << college << ", " << branch << ", "
+         << attendance << ", " << physics << ", " << chemistry << ", " << maths << "\n";
+    file.close();
+
+    char moreData;
+    cout << "\nAdd more Record? (Y/N): ";
+    cin >> moreData;
+
+    if (tolower(moreData) == 'y')
+    {
+        addData();
+    }
+    else
+    {
+        adminFunction();
+    }
+}
+
+
 void viewData()
 {
     system("cls");
 
     fstream file("data.csv");
 
-    if (!file)
+    if (!file.is_open())
     {
-        cout << "fail in opening the file";
+        cout << "Error opening file!" << endl;
+        return;
     }
+
     cout << "\n\t\t\t\t\t\t|Students Record| \n\n";
 
     cout << "\n-----------------------------------------------------------------------------------------------------------------------\n"
@@ -453,7 +443,7 @@ void viewData()
          << endl;
     string rollNumber, name, college, branch, attendance, physics, chemistry, maths;
 
-    while (!file.eof()) // file.eof() = detects as how long the f
+    while (!file.eof()) 
     {
         getline(file, rollNumber, ',');
         getline(file, name, ',');
@@ -471,46 +461,126 @@ void viewData()
     cout << "\n-----------------------------------------------------------------------------------------------------------------------" << endl;
     file.close();
 
-    cout << "\n\n 1. Add Record\n";
-    cout << " 2. Delete Record\n";
-    cout << " 3. Update Record\n";
-    cout << " 5. Main Menu\n";
-    cout << " 6. Exit\n";
-    cout << "\nEnter choice : ";
-    // adminFunction();
+    adminFunction();
 }
 
-void adminVerification()
+
+void viewDataOptimized()
 {
     system("cls");
 
-    string password;
-
-    cout << "\n\n\n\n\n\t\t\t\t\t";
-    cout << "\n\n\n\t\t\t\t\tEnter Password : ";
-
-    do
+    fstream file("data.csv"); // A file pointer to data.csv
+    if (!file.is_open())
     {
-        cin >> password;
-
-        if (password != "password")
-        {
-            system("cls");
-            cout << "\n\n\n\n\n\t\t"
-                 << "wrong password!, try again or type 'menu' to Navigate to Main Menu";
-            cout << "\n\n\n\t\t\t\t\tEnter Password : ";
-        }
-
-        if (password == "Menu" || password == "menu" || password == "MENU")
-        {
-            mainMenu();
-        }
-
+        cout << "Error opening file!" << endl;
+        return;
     }
 
-    while (password != "password");
-    adminFunction(); // main menu function is in the Header File adminFunction.h
+    cout << "\n\t\t\t\t\t\t| Students Record | \n\n";
+    cout << "\n-----------------------------------------------------------------------------------------------------------------------\n" << endl;
+    cout << left << setw(8) << "Roll"
+         << setw(24) << "Name"
+         << setw(16) << "College"
+         << setw(16) << "Branch"
+         << setw(12) << "Attendance"
+         << setw(10) << "Physics"
+         << setw(12) << "Chemistry"
+         << setw(10) << "Maths" << endl;
+    cout << endl;
+
+    string line;
+    
+    while (getline(file, line)) // Read each line from the file // More effective that the !file.eof condition
+    {
+        stringstream ss(line);
+        string rollNumber, name, college, branch, attendance, physics, chemistry, maths;
+
+        getline(ss, rollNumber, ',');
+        getline(ss, name, ',');
+        getline(ss, college, ',');
+        getline(ss, branch, ',');
+        getline(ss, attendance, ',');
+        getline(ss, physics, ',');
+        getline(ss, chemistry, ',');
+        getline(ss, maths, '\n');
+
+        // Output the row with proper formatting
+        cout << left << setw(8) << rollNumber
+             << setw(24) << name
+             << setw(16) << college
+             << setw(16) << branch
+             << setw(12) << attendance
+             << setw(10) << physics
+             << setw(12) << chemistry
+             << setw(10) << maths << endl;
+    }
+
+    cout << "\n-----------------------------------------------------------------------------------------------------------------------" << endl;
+    file.close();
+
+    adminFunction();
 }
+
+
+void studentFunctionOptimized()   // correct function
+{
+    system("cls");
+
+    fstream file("data.csv");
+
+    if(!file.is_open())
+    {
+        cout << "Error opening file!" << endl;
+        return;
+    }
+
+    cout << "Enter your roll number :" << endl;
+    cin >> roll;
+
+    string line, word;
+    int roll1;
+    while(getline(file, line))
+    {
+        stringstream ss(line);
+        getline(ss, word, ',');
+        roll1 = stoi(word)
+        if(roll1 == roll)
+        {
+            
+            cout << "\n\t\t\t\t\t\t| Your Records | \n\n";
+            cout << "\n-----------------------------------------------------------------------------------------------------------------------\n" << endl;
+    
+            string rollNumber, name, college, branch, attendance, physics, chemistry, maths;
+
+            rollNumber = word;
+            getline(ss, name, ',');
+            getline(ss, college, ',');
+            getline(ss, branch, ',');
+            getline(ss, attendance, ',');
+            getline(ss, physics, ',');
+            getline(ss, chemistry, ',');
+            getline(ss, maths, '\n');
+
+            // Output the row with proper formatting
+            cout << left << setw(8) << rollNumber
+                << setw(24) << name
+                << setw(16) << college
+                << setw(16) << branch
+                << setw(12) << attendance
+                << setw(10) << physics
+                << setw(12) << chemistry
+                << setw(10) << maths << endl;
+
+            cout << "\n-----------------------------------------------------------------------------------------------------------------------" << endl;
+
+            break;
+        } 
+    }
+    file.close();
+    system("Pause");
+    mainMenu();
+}
+
 
 void studentFunction()
 {
@@ -519,9 +589,10 @@ void studentFunction()
 
     fstream file("data.csv");
 
-    if (!file)
+    if (!file.is_open())
     {
-        cout << "fail in opening the file";
+        cout << "Error opening file!" << endl;
+        return;
     }
     cout << "\n\t\t\t\t\t\t|Students Record| \n\n";
 
@@ -532,7 +603,7 @@ void studentFunction()
          << endl;
     string rollNumber, name, college, branch, attendance, physics, chemistry, maths;
 
-    while (!file.eof()) // file.eof() = detects as how long the f
+    while (!file.eof()) // file.eof() = detects as how long the file
     {
         getline(file, rollNumber, ',');
         getline(file, name, ',');
@@ -552,3 +623,5 @@ void studentFunction()
     system("pause");
     mainMenu();
 }
+
+

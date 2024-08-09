@@ -15,21 +15,25 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Student-Record-Management-System\main.cpp">
+    <ClCompile Include="functionality.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Student-Record-Management-System\adminFunction.h">
+    <ClInclude Include="functionality.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Student-Record-Management-System\loading.h">
+    <ClInclude Include="loading.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\Student-Record-Management-System\data.csv">
-      <Filter>Resource Files</Filter>
-    </None>
+    <ClInclude Include="loginVerification.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdc++.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
