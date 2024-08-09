@@ -151,7 +151,7 @@ void mainMenu()
     system("pause");
 }
 
-
+/*
 void deleteData()
 {
     system("cls");
@@ -236,7 +236,7 @@ void deleteData()
 
     adminFunction();
 }
-
+*/
 
 void deleteDataOptimized()
 {
@@ -302,7 +302,7 @@ void deleteDataOptimized()
     adminFunction(); 
 }
 
-
+/*
 void addData()
 {
     system("cls");
@@ -370,7 +370,7 @@ void addData()
     adminFunction();
 }
 
-
+*/
 void addDataOptimized()
 {
     system("cls");
@@ -421,6 +421,7 @@ void addDataOptimized()
     }
 }
 
+/*
 
 void viewData()
 {
@@ -463,7 +464,7 @@ void viewData()
 
     adminFunction();
 }
-
+*/
 
 void viewDataOptimized()
 {
@@ -581,7 +582,7 @@ void studentFunctionOptimized()   // correct function
     mainMenu();
 }
 
-
+/*
 void studentFunction()
 {
 
@@ -623,5 +624,5 @@ void studentFunction()
     system("pause");
     mainMenu();
 }
-
+*/
 

@@ -11,9 +11,9 @@
 
 // Declarations to modify
 void mainMenu();
-void studentFunction();
+void studentFunctionOptimized();
 void adminVerification();
 void adminFunction();
-void addData();
-void viewData();
-void deleteData();
+void addDataOptimized();
+void viewDataOptimized();
+void deleteDataOptimized();
