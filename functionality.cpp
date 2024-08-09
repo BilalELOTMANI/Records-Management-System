@@ -1,4 +1,4 @@
-#include "adminFunction.h"
+#include "functionality.h"
 
 using namespace std;
 
@@ -238,7 +238,7 @@ void deleteData()
 }
 */
 
-void deleteDataOptimized()
+void deleteData()
 {
     system("cls");
 
@@ -371,7 +371,7 @@ void addData()
 }
 
 */
-void addDataOptimized()
+void addData()
 {
     system("cls");
     fstream file("data.csv", ios::out | ios::app);
@@ -466,7 +466,7 @@ void viewData()
 }
 */
 
-void viewDataOptimized()
+void viewData()
 {
     system("cls");
 
@@ -523,7 +523,7 @@ void viewDataOptimized()
 }
 
 
-void studentFunctionOptimized()   // correct function
+void studentFunction()   // correct function
 {
     system("cls");
 
@@ -535,6 +535,7 @@ void studentFunctionOptimized()   // correct function
         return;
     }
 
+    int roll;
     cout << "Enter your roll number :" << endl;
     cin >> roll;
 
@@ -544,7 +545,7 @@ void studentFunctionOptimized()   // correct function
     {
         stringstream ss(line);
         getline(ss, word, ',');
-        roll1 = stoi(word)
+        roll1 = stoi(word);
         if(roll1 == roll)
         {
             

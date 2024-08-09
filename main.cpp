@@ -3,7 +3,7 @@
 #include <string>
 #include <Windows.h> 
 #include "loginVerification.h"
-#include "adminFunction.h"
+#include "functionality.h"
 
 using namespace std;
 
