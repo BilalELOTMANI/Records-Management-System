@@ -9,7 +9,7 @@
 #include <vector>
 #include <iomanip> // For setting the width of the output
 
-// Declarations to modify
+
 void mainMenu();
 void studentFunction();
 void adminVerification();
