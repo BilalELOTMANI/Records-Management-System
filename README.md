@@ -1,32 +1,62 @@
-# Student Record Management System
-A minimalist desktop app  to managae students record. **record are saved directly on an excel file to decrease data Entry labour cost**  and improves efficiency.
+# Student Records Management System
 
->launch the srm.exe file directly to use the App.
+![Loading Animation](https://img.shields.io/badge/loading-bar-blue) ![License](https://img.shields.io/badge/license-MIT-green)
 
->for testing purpose both passwords are set to "password".
+## Project Description
 
->Admin have full access to manipulate the data.
+This is a **Student Records Management System** built in C++. It offers a basic console-based interface for managing student records with functionalities like login verification, data management, and admin access. The system is designed for educational purposes, providing a simple yet functional application of C++ concepts.
 
->Student account can only view the data.
-## `Login`
-<img src="ScreenShot/Home.JPG">
+## Features
 
-## `Logged in as Admin`
-<img src="ScreenShot/AdminFunction.JPG">
+- **Loading Animation:** A dynamic loading bar that runs on startup.
+- **Login Verification:** Basic password protection before accessing the main system.
+- **Main Menu:** Provides access to different functionalities depending on the user type (student/admin).
+- **Admin Functions:** Add, view, and delete student records.
+- **Student Functions:** Restricted access to viewing data.
 
-## `Viewing Students Records`
-<img src="ScreenShot/ViewData.JPG">
+## Getting Started
 
-## ``Records Saved in Excel File``
-<img src="ScreenShot/ViewExcel.JPG">
+### Prerequisites
 
-### Running on Local machine
+Ensure you have the following installed on your system:
 
-- Install a C++ compiler (e.g., GCC).
-- Write your C++ code and save it with the .cpp extension.
-- Open the terminal (Linux/Mac) or Command Prompt (Windows).
-- Navigate to the directory containing your C++ source code.
-- Compile the code using the command: `g++ -o output_filename source_file.cpp`.
-- Run the executable using: `./output_filename` (Linux/Mac) or `output_filename.exe` (Windows).
-- Test and verify your program's functionality.
+- C++ Compiler (like GCC, Clang, or MSVC)
+- A C++ IDE or text editor (like Visual Studio Code, CLion, etc.)
+- Windows OS (for `Windows.h` dependency)
 
+### Installation
+
+1. **Clone the Repository:**
+    ```bash
+    git clone https://github.com/yourusername/student-records-management-system.git
+    ```
+2. **Navigate to the Project Directory:**
+    ```bash
+    cd student-records-management-system
+    ```
+3. **Compile the Project:**
+    - For Windows:
+      ```bash
+      g++ -o student_management main.cpp loginVerification.cpp functionality.cpp loading.cpp -luser32
+      ```
+    - For other systems, you might need to adjust the `#include <Windows.h>` dependencies.
+
+4. **Run the Executable:**
+    ```bash
+    ./student_management
+    ```
+
+### File Structure
+
+```plaintext
+student-records-management-system/
+├── include/
+│   ├── loading.h
+│   ├── loginVerification.h
+│   └── functionality.h
+├── src/
+│   ├── loading.cpp
+│   ├── loginVerification.cpp
+│   └── functionality.cpp
+├── main.cpp
+└── README.md
