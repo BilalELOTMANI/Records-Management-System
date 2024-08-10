@@ -26,9 +26,9 @@ Ensure you have the following installed on your system:
 
 ### Screenshots
 
-![Loading page](images/Img1.png)
-![Main page](images/Img2.png)
-![Admin page](images/Img3.png)
+![Loading page](ScreenShots/images/Img1.png)
+![Main page](ScreenShots/images/Img2.png)
+![Admin page](ScreenShots/images/Img3.png)
 
 
 
