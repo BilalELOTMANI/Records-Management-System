@@ -272,6 +272,7 @@ void viewData()
 {
     system("cls");
 
+
     fstream file("data.csv"); // A file pointer to data.csv
     if (!file.is_open())
     {

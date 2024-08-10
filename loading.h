@@ -7,7 +7,7 @@ using namespace std;
 void loadingBar()
 {
     system("cls");
-    system("color 1F");
+    system("color 40"); // Red background and black text
 
     // Fetch console width dynamically
     CONSOLE_SCREEN_BUFFER_INFO csbi;
@@ -44,4 +44,3 @@ void loadingBar()
 
     cout << "\n\n";
 }
-

@@ -18,7 +18,7 @@ int main()
     cout.tie(NULL);
 
     loadingBar(); 
-    system("color 9F");
+    system("color 40"); // Red background and black text
 
     loginVerification();
     return 0;
