@@ -24,6 +24,14 @@ Ensure you have the following installed on your system:
 - A C++ IDE or text editor (like Visual Studio Code, CLion, etc.)
 - Windows OS (for `Windows.h` dependency)
 
+### Screenshots
+
+![Loading page](images/Img1.png)
+![Main page](images/Img2.png)
+![Admin page](images/Img3.png)
+
+
+
 
 ### File Structure
 
@@ -39,3 +47,4 @@ student-records-management-system/
 │   └── functionality.cpp
 ├── main.cpp
 └── README.md
+
